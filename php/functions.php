@@ -68,7 +68,7 @@ function ep_start_date() {
     ?>
     <p>Enter a date and time in the format <strong>mm/dd/yyyy 00:00:00</strong>.</p>
     <p>Entering the time (00:00:00) is optional, but recommended.</p>
-    <input size="30" name="start_date" value="<?php echo format_display_date($start_date); ?>" />
+    <input type="date" name="start_date" id="date" value="<?php echo format_display_date($start_date); ?>" />  
     <?php
 }
 
