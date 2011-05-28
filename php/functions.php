@@ -144,4 +144,16 @@ function ep_events_custom_columns($column) {
       }
 }
 
+// include javascript
+function ep_print_js() {
+	global $add_js;
+ 
+	if (!$add_js) {
+		return;
+    }
+ 
+	wp_register_script('my-script', plugins_url('my-script.js', __FILE__), array('jquery'), '1.0', true);
+	wp_print_scripts('my-script');
+}
+
 ?>
