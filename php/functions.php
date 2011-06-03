@@ -145,18 +145,29 @@ function ep_events_custom_columns($column) {
       }
 }
 
-// include javascript
-function ep_print_js() {
+// check to see if we're on the event post editor page in the admin
+function ep_is_event_editor() {
     global $pagenow, $typenow;
-
+ 
     // Sometimes $typenow is not available, so check and get it if needed.
     if (empty($typenow) && !empty($_GET['post'])) {
         $post = get_post($_GET['post']);
         $typenow = $post->post_type;
-    }
-    
+    }   
+
     if (($pagenow == 'post.php' || $pagenow == 'post-new.php') && $typenow == 'event') {
-        wp_enqueue_script('javascript', plugins_url('js/script.js', dirname(__FILE__)), array('jquery'));
+        return true;
+    } else {
+        return false;
+    }
+}
+
+// include javascript
+function ep_print_js() {
+    
+    if (ep_is_event_editor() == true) {
+        wp_enqueue_script('ep_js', plugins_url('js/script.js', dirname(__FILE__)), array('jquery'));
+        wp_enqueue_script('ep_jq_ui', plugins_url('js/jquery-ui-1.8.13.custom.min.js', dirname(__FILE__)), array('jquery'));
     }
 }
 ?>
