@@ -45,6 +45,7 @@ function ep_admin_init() {
     add_meta_box("start_date_meta", "Event Start Date/Time", "ep_start_date", "event", "normal", "low");
     add_meta_box("end_date_meta", "Event End Date/Time", "ep_end_date", "event", "normal", "low");
     add_meta_box("featured_meta", "Featured Event?", "ep_featured", "event", "side", "low");
+    ep_print_js();
 }
 
 // Event location admin form
@@ -146,8 +147,16 @@ function ep_events_custom_columns($column) {
 
 // include javascript
 function ep_print_js() {
-    wp_enqueue_script('javascript', plugins_url('js/script.js', dirname(__FILE__)), array('jquery'));
+    global $pagenow, $typenow;
+
+    // Sometimes $typenow is not available, so check and get it if needed.
+    if (empty($typenow) && !empty($_GET['post'])) {
+        $post = get_post($_GET['post']);
+        $typenow = $post->post_type;
+    }
+    
+    if (($pagenow == 'post.php' || $pagenow == 'post-new.php') && $typenow == 'event') {
+        wp_enqueue_script('javascript', plugins_url('js/script.js', dirname(__FILE__)), array('jquery'));
+    }
 }
-
-
 ?>

@@ -41,7 +41,6 @@ if (isset($event_publr)) {
     add_action("admin_init", "ep_admin_init");
     add_action('save_post', 'ep_save_details');
     add_action("manage_posts_custom_column",  "ep_events_custom_columns");
-    add_action('wp_print_scripts', 'ep_print_js');
 
     //Filters
     add_filter("manage_edit-event_columns", "ep_events_edit_columns");
