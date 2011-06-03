@@ -46,6 +46,7 @@ function ep_admin_init() {
     add_meta_box("end_date_meta", "Event End Date/Time", "ep_end_date", "event", "normal", "low");
     add_meta_box("featured_meta", "Featured Event?", "ep_featured", "event", "side", "low");
     ep_print_js();
+    ep_print_css();
 }
 
 // Event location admin form
@@ -168,6 +169,14 @@ function ep_print_js() {
     if (ep_is_event_editor() == true) {
         wp_enqueue_script('ep_js', plugins_url('js/script.js', dirname(__FILE__)), array('jquery'));
         wp_enqueue_script('ep_jq_ui', plugins_url('js/jquery-ui-1.8.13.custom.min.js', dirname(__FILE__)), array('jquery'));
+    }
+}
+
+// include css
+function ep_print_css() {
+
+    if (ep_is_event_editor() == true) {
+        wp_enqueue_style('ep_css', plugins_url('css/ui-lightness/jquery-ui-1.8.13.custom.css', dirname(__FILE__)));
     }
 }
 ?>
