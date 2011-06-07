@@ -70,7 +70,60 @@ function ep_start_date() {
     ?>
     <p>Enter a date and time in the format <strong>mm/dd/yyyy 00:00:00</strong>.</p>
     <p>Entering the time (00:00:00) is optional, but recommended.</p>
-    <input type="date" name="start_date" id="date" value="<?php echo format_display_date($start_date); ?>" />  
+    <label>Start Date</label>
+    <input type="date" name="start_date" class="date" value="<?php echo format_display_date($start_date); ?>" />
+    <label>Start Time</label>
+    <input class="ep-timepicker" type="text" name="start_time" value="<?php echo $start_time; ?>" />
+    <ol class="ep-timepicker">
+        <li>12:00 am</li>
+        <li>12:30 am</li>
+        <li>1:00 am</li>
+        <li>1:30 am</li>
+        <li>2:00 am</li>
+        <li>2:30 am</li>
+        <li>3:00 am</li>
+        <li>3:30 am</li>
+        <li>4:00 am</li>
+        <li>4:30 am</li>
+        <li>5:00 am</li>
+        <li>5:30 am</li>
+        <li>6:00 am</li>
+        <li>6:30 am</li>
+        <li>7:00 am</li>
+        <li>7:30 am</li>
+        <li>8:00 am</li>
+        <li>8:30 am</li>
+        <li>9:00 am</li>
+        <li>9:30 am</li>
+        <li>10:00 am</li>
+        <li>10:30 am</li>
+        <li>11:00 am</li>
+        <li>11:30 am</li>
+        <li>12:00 pm</li>
+        <li>12:30 pm</li>
+        <li>1:00 pm</li>
+        <li>1:30 pm</li>
+        <li>2:00 pm</li>
+        <li>2:30 pm</li>
+        <li>3:00 pm</li>
+        <li>3:30 pm</li>
+        <li>4:00 pm</li>
+        <li>4:30 pm</li>
+        <li>5:00 pm</li>
+        <li>5:30 pm</li>
+        <li>6:00 pm</li>
+        <li>6:30 pm</li>
+        <li>7:00 pm</li>
+        <li>7:30 pm</li>
+        <li>8:00 pm</li>
+        <li>8:30 pm</li>
+        <li>9:00 pm</li>
+        <li>9:30 pm</li>
+        <li>10:00 pm</li>
+        <li>10:30 pm</li>
+        <li>11:00 pm</li>
+        <li>11:30 pm</li>
+    </ol>
     <?php
 }
 
@@ -82,7 +135,7 @@ function ep_end_date() {
     ?>
     <p>Enter a date and time in the format <strong>mm/dd/yyyy 00:00:00</strong>.</p>
     <p>Again, entering the time (00:00:00) is optional, but recommended.</p>
-    <input size="30" name="end_date" value="<?php echo format_display_date($end_date); ?>" />
+    <input type="date" name="end_date" class="date" value="<?php echo format_display_date($end_date); ?>" />  
     <?php
 }
 
@@ -176,7 +229,8 @@ function ep_print_js() {
 function ep_print_css() {
 
     if (ep_is_event_editor() == true) {
-        wp_enqueue_style('ep_css', plugins_url('css/ui-lightness/jquery-ui-1.8.13.custom.css', dirname(__FILE__)));
+        wp_enqueue_style('ep-jquery-ui', plugins_url('css/ui-lightness/jquery-ui-1.8.13.custom.css', dirname(__FILE__)));
+        wp_enqueue_style('ep-core', plugins_url('css/event-publisher.css', dirname(__FILE__)));
     }
 }
 ?>

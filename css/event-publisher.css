@@ -1,0 +1,5 @@
+input.ep-timepicker {width:100px;}
+ol.ep-timepicker {display:none; margin:0; padding:0; height:150px; overflow:scroll; width:100px; background:#fff; border:1px solid #999; list-style-type:none; position:absolute; z-index:1;}
+ol.ep-timepicker.visible {display:block; width:100px;}
+ol.ep-timepicker li {margin:0; padding:0; padding:0 3px;}
+ol.ep-timepicker li:hover {background:#EAF2FA;}
