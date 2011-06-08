@@ -70,7 +70,7 @@ EP.timepicker = (function($) {
 (function($) {
     $(document).ready(function() {
         EP.someMethod();
-        $('input.date').datepicker();   
+        $('input.ep-datepicker').datepicker();
         EP.timepicker.init();
     });
 })(jQuery);
