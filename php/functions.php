@@ -71,9 +71,9 @@ function ep_start_date() {
     <p>Enter a date and time in the format <strong>mm/dd/yyyy 00:00:00</strong>.</p>
     <p>Entering the time (00:00:00) is optional, but recommended.</p>
     <label>Start Date</label>
-    <input type="date" name="start_date" class="date" value="<?php echo format_display_date($start_date); ?>" />
+    <input type="date" name="start_date" class="ep-datepicker" value="<?php echo format_display_date($start_date); ?>" />
     <label>Start Time</label>
-    <input class="ep-timepicker" type="text" name="start_time" value="<?php echo $start_time; ?>" />
+    <input class="ep-timepicker" type="text" name="start_time" value="<?php echo get_time($start_date); ?>" />
     <ol class="ep-timepicker">
         <li>12:00 am</li>
         <li>12:30 am</li>
