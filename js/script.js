@@ -39,8 +39,7 @@ EP.timepicker = (function($) {
 
         populateInput: function () {
             $(dropdown).find('li').click(function() {
-                console.log(this);
-                $(trigger).attr('value', $(this).text());
+                $(this).parent().prev(trigger).attr('value', $(this).text());
                 EP.timepicker.hideDropdown();
             });
         }
