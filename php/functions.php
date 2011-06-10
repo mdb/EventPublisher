@@ -68,13 +68,11 @@ function ep_start_date() {
     $custom = get_post_custom($post->ID);
     $start_date = $custom["start_date"][0];
     ?>
-    <p>Enter a date and time in the format <strong>mm/dd/yyyy 00:00:00</strong>.</p>
-    <p>Entering the time (00:00:00) is optional, but recommended.</p>
-    <label>Start Date</label>
-    <input type="text" name="event_date" class="ep-datepicker" value="<?php echo format_display_date($start_date); ?>" /> <!--TODO: why doesn't this validate with type="date" -->
-    <label>Start Time</label>
-    <input class="ep-timepicker" type="text" name="event_time" value="<?php echo get_time($start_date); ?>" />
-    <ol class="ep-timepicker">
+    <label class="ep">Start Date</label>
+    <input type="text" name="event_start_date" class="ep ep-datepicker" value="<?php echo format_display_date($start_date); ?>" /> <!--TODO: why doesn't this validate with type="date" -->
+    <label class="ep">Start Time</label>
+    <input class="ep ep-timepicker" type="text" name="event_start_time" value="<?php echo get_time($start_date); ?>" />
+    <ol class="ep ep-timepicker">
         <li>12:00 am</li>
         <li>12:30 am</li>
         <li>1:00 am</li>
@@ -133,9 +131,60 @@ function ep_end_date() {
     $custom = get_post_custom($post->ID);
     $end_date = $custom['end_date'][0];
     ?>
-    <p>Enter a date and time in the format <strong>mm/dd/yyyy 00:00:00</strong>.</p>
-    <p>Again, entering the time (00:00:00) is optional, but recommended.</p>
-    <input type="date" name="end_date" class="date" value="<?php echo format_display_date($end_date); ?>" />  
+    <label>End Date</label>
+    <input type="text" name="event_end_date" class="ep ep-datepicker" value="<?php echo format_display_date($end_date); ?>" />  
+    <label class="ep">End Time</label>
+    <input class="ep ep-timepicker" type="text" name="event_end_time" value="<?php echo get_time($end_date); ?>" />
+    <ol class="ep ep-timepicker">
+        <li>12:00 am</li>
+        <li>12:30 am</li>
+        <li>1:00 am</li>
+        <li>1:30 am</li>
+        <li>2:00 am</li>
+        <li>2:30 am</li>
+        <li>3:00 am</li>
+        <li>3:30 am</li>
+        <li>4:00 am</li>
+        <li>4:30 am</li>
+        <li>5:00 am</li>
+        <li>5:30 am</li>
+        <li>6:00 am</li>
+        <li>6:30 am</li>
+        <li>7:00 am</li>
+        <li>7:30 am</li>
+        <li>8:00 am</li>
+        <li>8:30 am</li>
+        <li>9:00 am</li>
+        <li>9:30 am</li>
+        <li>10:00 am</li>
+        <li>10:30 am</li>
+        <li>11:00 am</li>
+        <li>11:30 am</li>
+        <li>12:00 pm</li>
+        <li>12:30 pm</li>
+        <li>1:00 pm</li>
+        <li>1:30 pm</li>
+        <li>2:00 pm</li>
+        <li>2:30 pm</li>
+        <li>3:00 pm</li>
+        <li>3:30 pm</li>
+        <li>4:00 pm</li>
+        <li>4:30 pm</li>
+        <li>5:00 pm</li>
+        <li>5:30 pm</li>
+        <li>6:00 pm</li>
+        <li>6:30 pm</li>
+        <li>7:00 pm</li>
+        <li>7:30 pm</li>
+        <li>8:00 pm</li>
+        <li>8:30 pm</li>
+        <li>9:00 pm</li>
+        <li>9:30 pm</li>
+        <li>10:00 pm</li>
+        <li>10:30 pm</li>
+        <li>11:00 pm</li>
+        <li>11:30 pm</li>
+    </ol>
     <?php
 }
 
@@ -157,8 +206,8 @@ function ep_save_details() {
     global $post;
  
     update_post_meta($post->ID, "event_location", $_POST["event_location"]);
-    update_post_meta($post->ID, "start_date", set_iso_date($_POST["event_date"], $_POST['event_time'])); // save as ISO-8601
-    update_post_meta($post->ID, "end_date", format_saved_date($_POST["end_date"])); // save as ISO-8601
+    update_post_meta($post->ID, "start_date", set_iso_date($_POST["event_start_date"], $_POST['event_start_time']));
+    update_post_meta($post->ID, "end_date", set_iso_date($_POST["event_end_date"], $_POST['event_end_time']));
     update_post_meta($post->ID, "featured", $_POST["featured"]);
 }
 
