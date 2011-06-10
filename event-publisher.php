@@ -3,7 +3,7 @@
 /*
 Plugin Name: Event Publisher
 Plugin URI: http://www.mikeball.us
-Description: A simple event publisher for wordpress. Event Publisher supports location, start time, end time, as well as the abilityt to flag an event as 'Featured.'
+Description: A simple event publisher for Wordpress. Event Publisher supports location, start time, end time, as well as the ability to flag an event as 'Featured.'
 Version: 0.1
 Author: Mike Ball
 Author URI: http://www.mikeball.us
@@ -12,8 +12,12 @@ License: GPL2
 
 /*
 TODO:
-    - create /php directory inside of which is actions.php, helpers.php, and filters.php
-    - figure out how to utilize date picker
+    - make timepicker aware of viewport and display dropdown above input if close to viewport bottom edge
+    - update jquery ui theme
+    - Areas to test
+        - display on user front end
+        - template logic
+        - admin views
 */
 
 // include the file containing most of the necessary functions
