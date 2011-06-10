@@ -3,15 +3,6 @@ if (typeof EP === 'undefined' || !EP)  {
     var EP = {};
 }
 
-EP = (function($) {
-    obj = {
-        someMethod: function () {
-            console.log('This works.');
-        }
-    }
-    return obj;
-})(jQuery);
-
 // timepicker
 EP.timepicker = (function($) {
 
@@ -36,13 +27,6 @@ EP.timepicker = (function($) {
                 $(this).next($(dropdown)).addClass('visible');
                 EP.timepicker.setDropdownPos();
             });
-
-            /*
-            $(trigger).blur(function() {
-                $(this).next($(dropdown)).removeClass('visible');
-            });
-            */
-
         },
 
         hideDropdown: function () {
@@ -60,7 +44,7 @@ EP.timepicker = (function($) {
                 EP.timepicker.hideDropdown();
             });
         }
-    }
+    };
 
     return obj;
 
@@ -69,7 +53,6 @@ EP.timepicker = (function($) {
 // what to call on doc ready 
 (function($) {
     $(document).ready(function() {
-        EP.someMethod();
         $('input.ep-datepicker').datepicker();
         EP.timepicker.init();
     });
