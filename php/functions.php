@@ -70,9 +70,6 @@ function ep_start_date() {
     ?>
     <p>Enter a date and time in the format <strong>mm/dd/yyyy 00:00:00</strong>.</p>
     <p>Entering the time (00:00:00) is optional, but recommended.</p>
-    <?php echo '<p>raw start_date:' . $start_date . '</p>'; ?>
-    <?php echo '<p>format_display_date(): ' .format_display_date($start_date); ?>
-    <?php echo '<p>get_time(): ' . get_time($start_date) . '</p>'; ?>
     <label>Start Date</label>
     <input type="text" name="event_date" class="ep-datepicker" value="<?php echo format_display_date($start_date); ?>" /> <!--TODO: why doesn't this validate with type="date" -->
     <label>Start Time</label>
@@ -127,12 +124,6 @@ function ep_start_date() {
         <li>11:00 pm</li>
         <li>11:30 pm</li>
     </ol>
-    <!--
-    TODO:
-    disable submit button until improper formats are saved
-    trigger onChange event that prints event_date/event_time to start_date's value
-    -->
-    <input type="text" name="start_time" value="<?php echo $start_date; ?>" />
     <?php
 }
 
@@ -166,7 +157,6 @@ function ep_save_details() {
     global $post;
  
     update_post_meta($post->ID, "event_location", $_POST["event_location"]);
-    //update_post_meta($post->ID, "start_date", format_saved_date($_POST["start_date"])); // save as ISO-8601
     update_post_meta($post->ID, "start_date", set_iso_date($_POST["event_date"], $_POST['event_time'])); // save as ISO-8601
     update_post_meta($post->ID, "end_date", format_saved_date($_POST["end_date"])); // save as ISO-8601
     update_post_meta($post->ID, "featured", $_POST["featured"]);
