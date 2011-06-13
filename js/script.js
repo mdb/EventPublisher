@@ -113,9 +113,9 @@ EP.timepicker = (function($) {
             return true;
         },
 
-        save: function (formSelector) { //TODO: why this no work?
+        save: function (formSelector) {
             var form = $(formSelector);
-            $(form).submit(function () {
+            $(formSelector).submit(function () {
                 if (EP.timepicker.validateInput() === false) {
                     $('input#publish').removeClass('button-primary-disabled'); // Remove the 'focused' style for the Publish button
                     $('img#ajax-loading').hide(); // re-hide the 'loading' graphic to left of Publish button
