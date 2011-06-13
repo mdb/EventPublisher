@@ -47,6 +47,7 @@ EP.timepicker = (function($) {
         init: function () {
             this.toggleDropdown();
             this.populateInput();
+            this.save('form#post');
         },
 
         toggleDropdown: function () {
@@ -76,7 +77,6 @@ EP.timepicker = (function($) {
             var validTime = /^(\d{1,2}):(\d{2})(:(\d{2}))?(\s?(AM|am|PM|pm))?$/;
                 inputText = $(trigger).attr('value'),
                 matchArray = inputText.match(validTime);
-                console.log(matchArray);
                 
             if (inputText !== '') {
 
@@ -111,6 +111,19 @@ EP.timepicker = (function($) {
 
             alert('All input fields have been validated!');
             return true;
+        },
+
+        save: function (formSelector) { //TODO: why this no work?
+            var form = $(formSelector);
+            $(form).submit(function () {
+                if (EP.timepicker.validateInput() === false) {
+                    $('input#publish').removeClass('button-primary-disabled'); // Remove the 'focused' style for the Publish button
+                    $('img#ajax-loading').hide(); // re-hide the 'loading' graphic to left of Publish button
+                    return false;
+                } else if (EP.timepicker.validateInput() === true) {
+                    return true;
+                }
+            });
         }
     };
 
