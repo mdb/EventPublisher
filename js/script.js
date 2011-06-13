@@ -14,6 +14,34 @@ EP.timepicker = (function($) {
         return Math.floor($(elem).position().left);
     }
 
+    function formError(string) {
+        $(trigger).addClass('error');
+        alert(string);
+    }
+
+    function checkHours(ampm, hours) {
+
+        // if there is an am/pm specified
+        if (ampm) {
+
+            if (hours < 1 || hours > 12) { 
+                return false; 
+            }
+
+        // if there is no am/pm specified
+        } else { 
+            if (hours > 23) { 
+                return false; 
+            }
+        }
+    }
+
+    function checkMinsSecs(minsOrSecs) {
+        if (minsOrSecs > 59) {
+            return false; 
+        }
+    }
+
     obj = {
 
         init: function () {
@@ -42,6 +70,46 @@ EP.timepicker = (function($) {
                 $(this).parent().prev(trigger).attr('value', $(this).text());
                 EP.timepicker.hideDropdown();
             });
+        },
+
+        validateInput: function () {
+            var validTime = /^(\d{1,2}):(\d{2})(:(\d{2}))?(\s?(AM|am|PM|pm))?$/;
+                inputText = $(trigger).attr('value'),
+                matchArray = inputText.match(validTime);
+                
+            if (inputText !== '') {
+
+                var hours = matchArray[1],
+                    mins = matchArray[2],
+                    secs = matchArray[4],
+                    ampm = matchArray[6];
+            
+                if (matchArray) {
+
+                    if (checkHours(ampm, hours) === false) {
+                        formError('Invalid value for hours: ' + hours);
+                        return false;
+                    }
+
+                    if (checkMinsSecs(mins) === false) {
+                        formError('Invalid value for minutes: ' + mins);
+                        return false;
+                    }
+
+                    if (checkMinsSecs(secs) === false) {
+                        formError('Invaid value for seconds: ' + secs);
+                        return false;
+                    }
+
+                } else {
+
+                    formError('Invalid time format: ' + inputText);
+                    return false;
+                }
+            }
+
+            alert('All input fields have been validated!');
+            return true;
         }
     };
 
