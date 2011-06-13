@@ -76,15 +76,16 @@ EP.timepicker = (function($) {
             var validTime = /^(\d{1,2}):(\d{2})(:(\d{2}))?(\s?(AM|am|PM|pm))?$/;
                 inputText = $(trigger).attr('value'),
                 matchArray = inputText.match(validTime);
+                console.log(matchArray);
                 
             if (inputText !== '') {
 
-                var hours = matchArray[1],
-                    mins = matchArray[2],
-                    secs = matchArray[4],
-                    ampm = matchArray[6];
-            
                 if (matchArray) {
+
+                    var hours = matchArray[1],
+                        mins = matchArray[2],
+                        secs = matchArray[4],
+                        ampm = matchArray[6];
 
                     if (checkHours(ampm, hours) === false) {
                         formError('Invalid value for hours: ' + hours);
