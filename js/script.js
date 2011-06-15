@@ -6,15 +6,12 @@ if (typeof EP === 'undefined' || !EP)  {
 // timepicker
 EP.timepicker = (function($) {
 
-    var trigger = 'input.ep-timepicker',
-        dropdown = 'ol.ep-timepicker';
-
     // helpers
     function getPosLeft(elem) {
         return Math.floor($(elem).position().left);
     }
 
-    function formError(string) {
+    function formError(trigger, string) {
         $(trigger).addClass('error');
         alert(string);
     }
@@ -45,37 +42,50 @@ EP.timepicker = (function($) {
     obj = {
 
         init: function () {
-            this.toggleDropdown();
-            this.populateInput();
+
+            var startDatePicker = $('#start_date_meta input.ep-timepicker'),
+                endDatePicker = $('#end_date_meta input.ep-timepicker'),
+                startDateDropdown = $('#start_date_meta ol.ep-timepicker'),
+                endDateDropdown = $('#end_date_meta ol.ep-timepicker');
+                
+            this.toggleDropdown(startDatePicker, startDateDropdown);
+            this.toggleDropdown(endDatePicker, endDateDropdown);
+            this.populateInput(startDatePicker, startDateDropdown);
+            this.populateInput(endDatePicker, endDateDropdown);
             //this.save('form#post');
-            $(trigger).change(EP.timepicker.validateInput);
-        },
-
-        toggleDropdown: function () {
-
-            $(trigger).focus(function() {
-                $(this).next($(dropdown)).addClass('visible');
-                EP.timepicker.setDropdownPos();
+            $(startDatePicker).change(function() {
+                EP.timepicker.validateInput(startDatePicker);
+            });
+            $(endDatePicker).change(function() {
+                EP.timepicker.validateInput(endDatePicker);
             });
         },
 
-        hideDropdown: function () {
+        toggleDropdown: function (trigger, dropdown) {
+
+            $(trigger).focus(function() {
+                $(dropdown).addClass('visible');
+                EP.timepicker.setDropdownPos(trigger, dropdown);
+            });
+        },
+
+        hideDropdown: function (dropdown) {
             $(dropdown).removeClass('visible');
         },
 
-        setDropdownPos: function () {
+        setDropdownPos: function (trigger, dropdown) {
             $(dropdown).css('left', getPosLeft(trigger));
         },
 
-        populateInput: function () {
+        populateInput: function (trigger, dropdown) {
             $(dropdown).find('li').click(function() {
                 $(this).parent().prev(trigger).attr('value', $(this).text());
-                EP.timepicker.hideDropdown();
+                EP.timepicker.hideDropdown(dropdown);
             });
         },
 
-        validateInput: function () {
-            var validTime = /^(\d{1,2}):(\d{2})(:(\d{2}))?(\s?(AM|am|PM|pm))?$/,
+        validateInput: function (trigger) {
+            var validTime = /^(\d{1,2}):(\d{2})(:(\d{2}))?(\s?(AM|am|PM|pm))?$/;
                 inputText = $(trigger).attr('value'),
                 matchArray = inputText.match(validTime);
                 
@@ -89,23 +99,23 @@ EP.timepicker = (function($) {
                         ampm = matchArray[6];
 
                     if (checkHours(ampm, hours) === false) {
-                        formError('Invalid value for hours: ' + hours);
+                        formError(trigger, 'Invalid value for hours: ' + hours);
                         return false;
                     }
 
                     if (checkMinsSecs(mins) === false) {
-                        formError('Invalid value for minutes: ' + mins);
+                        formError(trigger, 'Invalid value for minutes: ' + mins);
                         return false;
                     }
 
                     if (checkMinsSecs(secs) === false) {
-                        formError('Invaid value for seconds: ' + secs);
+                        formError(trigger, 'Invaid value for seconds: ' + secs);
                         return false;
                     }
 
                 } else {
 
-                    formError('Invalid time format: ' + inputText);
+                    formError(trigger, 'Invalid time format: ' + inputText);
                     return false;
                 }
             }
