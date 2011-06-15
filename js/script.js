@@ -47,7 +47,8 @@ EP.timepicker = (function($) {
         init: function () {
             this.toggleDropdown();
             this.populateInput();
-            this.save('form#post');
+            //this.save('form#post');
+            $(trigger).change(EP.timepicker.validateInput);
         },
 
         toggleDropdown: function () {
@@ -74,7 +75,7 @@ EP.timepicker = (function($) {
         },
 
         validateInput: function () {
-            var validTime = /^(\d{1,2}):(\d{2})(:(\d{2}))?(\s?(AM|am|PM|pm))?$/;
+            var validTime = /^(\d{1,2}):(\d{2})(:(\d{2}))?(\s?(AM|am|PM|pm))?$/,
                 inputText = $(trigger).attr('value'),
                 matchArray = inputText.match(validTime);
                 
@@ -109,7 +110,7 @@ EP.timepicker = (function($) {
                 }
             }
 
-            alert('All input fields have been validated!');
+            $(trigger).removeClass('error');
             return true;
         },
 
@@ -119,6 +120,7 @@ EP.timepicker = (function($) {
                 if (EP.timepicker.validateInput() === false) {
                     $('input#publish').removeClass('button-primary-disabled'); // Remove the 'focused' style for the Publish button
                     $('img#ajax-loading').hide(); // re-hide the 'loading' graphic to left of Publish button
+                    alert('Please enter a valid time format.');
                     return false;
                 } else if (EP.timepicker.validateInput() === true) {
                     return true;
