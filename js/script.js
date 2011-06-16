@@ -85,7 +85,7 @@ EP.timepicker = (function($) {
         },
 
         validateInput: function (trigger) {
-            var validTime = /^(\d{1,2}):(\d{2})(:(\d{2}))?(\s?(AM|am|PM|pm))?$/;
+            var validTime = /^(\d{1,2}):(\d{2})(:(\d{2}))?(\s?(AM|am|PM|pm))?$/,
                 inputText = $(trigger).attr('value'),
                 matchArray = inputText.match(validTime);
                 
