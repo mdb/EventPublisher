@@ -24,7 +24,7 @@ TODO:
 require 'php/functions.php';
 
 // Create an 'EventPublisher' class and constructor if one does not already exist
-if (!class_exists("EventPublisher")) {
+if (!class_exists('EventPublisher')) {
     class EventPublisher {
         function EventPublisher() { //constructor
 
@@ -33,7 +33,7 @@ if (!class_exists("EventPublisher")) {
 }
 
 // Instantiate the EventPublisher class
-if (class_exists("EventPublisher")) {
+if (class_exists('EventPublisher')) {
     $event_publr = new EventPublisher();
 }
 
@@ -42,12 +42,12 @@ if (isset($event_publr)) {
 
     //Actions
     add_action('init', 'ep_register');
-    add_action("admin_init", "ep_admin_init");
+    add_action('admin_init', 'ep_admin_init');
     add_action('save_post', 'ep_save_details');
-    add_action("manage_posts_custom_column",  "ep_events_custom_columns");
+    add_action('manage_posts_custom_column',  'ep_events_custom_columns');
 
     //Filters
-    add_filter("manage_edit-event_columns", "ep_events_edit_columns");
+    add_filter('manage_edit-event_columns', 'ep_events_edit_columns');
 }
 
 ?>
