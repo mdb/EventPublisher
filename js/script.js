@@ -8,14 +8,17 @@ if (typeof EP === 'undefined' || !EP)  {
 
     EP.timepicker = function(options) {
 
+        // configuration options, which can be overridden via 'options' argument
         var settings = {
 
+                form: $('form#post'),
                 startPicker: $('#start_date_meta input.ep-timepicker'),
                 endPicker: $('#end_date_meta input.ep-timepicker'), 
                 startDropdown: $('#start_date_meta ol.ep-timepicker'),
                 endDropdown: $('#end_date_meta ol.ep-timepicker')
             },
 
+            // object to house private helper methods
             helpers = {
 
                 getPosLeft: function(elem) {
@@ -52,6 +55,7 @@ if (typeof EP === 'undefined' || !EP)  {
 
             },
 
+            // object to house public methods returned by EP.timepicker
             pubMethods = {
 
                 init: function () {
@@ -62,11 +66,12 @@ if (typeof EP === 'undefined' || !EP)  {
                     tp.toggleDropdown(settings.endPicker, settings.endDropdown);
                     tp.populateInput(settings.startPicker, settings.startDropdown);
                     tp.populateInput(settings.endPicker, settings.endDropdown);
-                    //this.save('form#post');
+                    tp.save();
                     
                     $(settings.startPicker).change(function() {
                         tp.validateInput(settings.startPicker);
                     });
+
                     $(settings.endPicker).change(function() {
                         tp.validateInput(settings.endPicker);
                     });
@@ -112,23 +117,23 @@ if (typeof EP === 'undefined' || !EP)  {
                                 ampm = matchArray[6];
 
                             if (helpers.checkHours(ampm, hours) === false) {
-                                formError(trigger, 'Invalid value for hours: ' + hours);
+                                helpers.formError(trigger, 'Invalid value for hours: ' + hours);
                                 return false;
                             }
 
-                            if (checkMinsSecs(mins) === false) {
-                                formError(trigger, 'Invalid value for minutes: ' + mins);
+                            if (helpers.checkMinsSecs(mins) === false) {
+                                helpers.formError(trigger, 'Invalid value for minutes: ' + mins);
                                 return false;
                             }
 
-                            if (checkMinsSecs(secs) === false) {
-                                formError(trigger, 'Invaid value for seconds: ' + secs);
+                            if (helpers.checkMinsSecs(secs) === false) {
+                                helpers.formError(trigger, 'Invaid value for seconds: ' + secs);
                                 return false;
                             }
 
                         } else {
 
-                            formError(trigger, 'Invalid time format: ' + inputText);
+                            helpers.formError(trigger, 'Invalid time format: ' + inputText);
                             return false;
                         }
                     }
@@ -137,15 +142,21 @@ if (typeof EP === 'undefined' || !EP)  {
                     return true;
                 },
 
-                save: function (formSelector) {
-                    var form = $(formSelector);
-                    $(formSelector).submit(function () {
-                        if (EP.timepicker.validateInput() === false) {
+                save: function () {
+                    var form = settings.form,
+                        tp = this;
+
+                    $(form).submit(function () {
+
+                        if (tp.validateInput(settings.startPicker) === false || tp.validateInput(settings.endPicker) === false) {
+
                             $('input#publish').removeClass('button-primary-disabled'); // Remove the 'focused' style for the Publish button
                             $('img#ajax-loading').hide(); // re-hide the 'loading' graphic to left of Publish button
                             alert('Please enter a valid time format.');
                             return false;
-                        } else if (EP.timepicker.validateInput() === true) {
+
+                        } else {
+
                             return true;
                         }
                     });
