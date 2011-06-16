@@ -6,7 +6,7 @@ if (typeof EP === 'undefined' || !EP)  {
 // timepicker
 (function($) {
 
-    EP.timepicker = function(options) {
+    EP.Timepicker = function(options) {
 
         // configuration options, which can be overridden via 'options' argument
         var settings = {
@@ -176,7 +176,7 @@ if (typeof EP === 'undefined' || !EP)  {
 (function($) {
     $(document).ready(function() {
         $('input.ep-datepicker').datepicker();
-        var timepicker = new EP.timepicker();
+        var timepicker = new EP.Timepicker();
         timepicker.init();
     });
 })(jQuery);
