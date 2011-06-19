@@ -41,10 +41,10 @@ function ep_register() {
 
 // Set up the meta fields on the post page of the admin
 function ep_admin_init() {
-    add_meta_box("event_location_meta", "Event Location", "ep_event_location", "event", "normal", "low");
-    add_meta_box("start_date_meta", "Event Start Date/Time", "ep_start_date", "event", "normal", "low");
-    add_meta_box("end_date_meta", "Event End Date/Time", "ep_end_date", "event", "normal", "low");
-    add_meta_box("featured_meta", "Featured Event?", "ep_featured", "event", "side", "low");
+    add_meta_box('event_location_meta', 'Event Location', 'ep_event_location', 'event', 'normal', 'low');
+    add_meta_box('start_date_meta', 'Event Start Date/Time', 'ep_start_date', 'event', 'normal', 'low');
+    add_meta_box('end_date_meta', 'Event End Date/Time', 'ep_end_date', 'event', 'normal', 'low');
+    add_meta_box('featured_meta', 'Featured Event?', 'ep_featured', 'event', 'side', 'low');
     ep_print_js();
     ep_print_css();
 }
@@ -53,7 +53,7 @@ function ep_admin_init() {
 function ep_event_location() {
     global $post;
     $custom = get_post_custom($post->ID);
-    $event_location = $custom["event_location"][0];
+    $event_location = $custom['event_location'][0];
     ?>
     <p>Enter the event's location. For example:</p>
     <p>333 Street Name<br />
@@ -66,7 +66,7 @@ function ep_event_location() {
 function ep_start_date() {
     global $post;
     $custom = get_post_custom($post->ID);
-    $start_date = $custom["start_date"][0];
+    $start_date = $custom['start_date'][0];
     ?>
     <label class="ep">Start Date</label>
     <input type="text" name="event_start_date" class="ep ep-datepicker" value="<?php echo format_display_date($start_date); ?>" /> <!--TODO: why doesn't this validate with type="date" -->
@@ -205,21 +205,21 @@ function ep_featured() {
 function ep_save_details() {
     global $post;
  
-    update_post_meta($post->ID, "event_location", $_POST["event_location"]);
-    update_post_meta($post->ID, "start_date", set_iso_date($_POST["event_start_date"], $_POST['event_start_time']));
-    update_post_meta($post->ID, "end_date", set_iso_date($_POST["event_end_date"], $_POST['event_end_time']));
-    update_post_meta($post->ID, "featured", $_POST["featured"]);
+    update_post_meta($post->ID, 'event_location', $_POST['event_location']);
+    update_post_meta($post->ID, 'start_date', set_iso_date($_POST['event_start_date'], $_POST['event_start_time']));
+    update_post_meta($post->ID, 'end_date', set_iso_date($_POST['event_end_date'], $_POST['event_end_time']));
+    update_post_meta($post->ID, 'featured', $_POST['featured']);
 }
 
 // Tweak the layout of the 'Events' page to include event list
 function ep_events_edit_columns($columns) {
     $columns = array(
-        "cb" => "<input type=\"checkbox\" />",
-        "title" => "Event",
-        "description" => "Description",
-        "start_date" => "Start Date",
-        "end_date" => "End Date",
-        "featured" => "Featured",
+        'cb' => '<input type="checkbox" />',
+        'title' => 'Event',
+        'description' => 'Description',
+        'start_date' => 'Start Date',
+        'end_date' => 'End Date',
+        'featured' => 'Featured',
     );
  
     return $columns;
@@ -230,20 +230,20 @@ function ep_events_custom_columns($column) {
     global $post;
  
     switch ($column) {
-        case "description":
+        case 'description':
             //the_excerpt(); // TODO: figure out why this displays the excerpt twice
             break;
-        case "start_date":
+        case 'start_date':
             $custom = get_post_custom();
-            echo format_display_date($custom["start_date"][0]);
+            echo format_display_date($custom['start_date'][0]);
             break;
-        case "end_date":
+        case 'end_date':
             $custom = get_post_custom();
-            echo format_display_date($custom["end_date"][0]);
+            echo format_display_date($custom['end_date'][0]);
             break;
-        case "featured":
+        case 'featured':
             $custom = get_post_custom();
-            echo $custom["featured"][0];
+            echo $custom['featured'][0];
             break;
       }
 }
