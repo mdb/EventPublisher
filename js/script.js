@@ -25,6 +25,15 @@ if (typeof EP === 'undefined' || !EP)  {
                     return Math.floor($(elem).position().left);
                 },
 
+                setPosTop: function(dropdown) {
+                    var dropdownHeight = $(dropdown).outerHeight(),
+                        viewportBottom = $(window).height() - $(window).scrollTop();
+
+                    if (dropdownHeight > viewportBottom) {
+                        $(dropdown).css('top', '0');
+                    }
+                },
+
                 formError: function(trigger, string) {
                     $(trigger).addClass('error');
                     alert(string);
@@ -64,8 +73,6 @@ if (typeof EP === 'undefined' || !EP)  {
 
                     tp.toggleDropdown(settings.startPicker, settings.startDropdown);
                     tp.toggleDropdown(settings.endPicker, settings.endDropdown);
-                    tp.populateInput(settings.startPicker, settings.startDropdown);
-                    tp.populateInput(settings.endPicker, settings.endDropdown);
                     tp.save();
                     
                     $(settings.startPicker).change(function() {
@@ -78,13 +85,20 @@ if (typeof EP === 'undefined' || !EP)  {
                 },
 
                 toggleDropdown: function (trigger, dropdown) {
-
                     var tp = this;
 
                     $(trigger).focus(function() {
                         $(dropdown).addClass('visible');
                         tp.setDropdownPos(trigger, dropdown);
                     });
+
+                    $(trigger).blur(function() {
+                        setTimeout(function () {
+                            tp.hideDropdown(dropdown);
+                        }, 0);
+                    });
+
+                    tp.populateInput(trigger, dropdown);
                 },
 
                 hideDropdown: function (dropdown) {
@@ -93,12 +107,16 @@ if (typeof EP === 'undefined' || !EP)  {
 
                 setDropdownPos: function (trigger, dropdown) {
                     $(dropdown).css('left', helpers.getPosLeft(trigger));
+                    //$(dropdown).css('top', helpers.getPosTop(trigger));
+                    //helpers.setPosTop(dropdown);
                 },
 
                 populateInput: function (trigger, dropdown) {
+                    var tp = this;
+
                     $(dropdown).find('li').click(function() {
-                        $(this).parent().prev(trigger).attr('value', $(this).text());
-                        EP.timepicker.hideDropdown(dropdown);
+                        $(trigger).attr('value', $(this).text());
+                        tp.hideDropdown(dropdown);
                     });
                 },
 
