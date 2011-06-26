@@ -25,13 +25,26 @@ if (typeof EP === 'undefined' || !EP)  {
                     return Math.floor($(elem).position().left);
                 },
 
-                setPosTop: function(dropdown) {
-                    var dropdownHeight = $(dropdown).outerHeight(),
-                        viewportBottom = $(window).height() - $(window).scrollTop();
+                setPosTop: function(trigger, dropdown) {
+                    var viewportHeight = $(window).height(),
+                        documentScrollTop = $(document).scrollTop(),
 
-                    if (dropdownHeight > viewportBottom) {
-                        $(dropdown).css('top', '0');
-                    }
+                        ddOffset = $(dropdown).offset(),
+                        ddHeight = $(dropdown).outerHeight(),
+                        ddWidth = $(dropdown).width(),
+
+                        minTop = documentScrollTop,
+                        maxTop = documentScrollTop + viewportHeight;
+
+                        if (ddOffset.top > minTop && ddOffset.top + ddHeight < maxTop) {
+                            return;
+
+                        } else {
+                            var marginTop = ddHeight + $(trigger).outerHeight();
+
+                            //position the dropdown above the input
+                            $(dropdown).css('margin-top', '-' + marginTop + 'px');
+                        }
                 },
 
                 formError: function(trigger, string) {
@@ -108,7 +121,7 @@ if (typeof EP === 'undefined' || !EP)  {
                 setDropdownPos: function (trigger, dropdown) {
                     $(dropdown).css('left', helpers.getPosLeft(trigger));
                     //$(dropdown).css('top', helpers.getPosTop(trigger));
-                    //helpers.setPosTop(dropdown);
+                    helpers.setPosTop(trigger, dropdown);
                 },
 
                 populateInput: function (trigger, dropdown) {
