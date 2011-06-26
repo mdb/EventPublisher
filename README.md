@@ -1,4 +1,4 @@
-# Thoonk #
+# EventPublisher #
 
 EventPublisher is simple Wordpress plugin that enables the publication of events via the Wordpress admin.
 
