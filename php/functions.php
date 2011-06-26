@@ -28,7 +28,7 @@ function ep_register() {
         'publicly_queryable' => true,
         'show_ui' => true,
         'query_var' => true,
-        'menu_icon' => get_stylesheet_directory_uri() . '/article16.png',
+        //'menu_icon' => plugins_url('images/some-icon.png', dirname(__FILE__)),
         'rewrite' => true,
         'capability_type' => 'post',
         'hierarchical' => false,
