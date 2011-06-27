@@ -194,9 +194,7 @@ function ep_featured() {
     $custom = get_post_custom($post->ID);
     $featured = $custom['featured'][0];
     ?>
-    <p>Do you want to make this event the featured Save the Date on the homepage?</p>
-    <p>Note that only one event may be 'Featured' at a time.</p>
-    <label>Yes, feature this event:</label>
+    <label>Flag this event as featured:</label>
     <input type="checkbox" name="featured" value="Featured" <?php if( $featured == 'Featured' ) { echo 'checked="checked"'; } ?> /> 
     <?php
 }
