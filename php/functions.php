@@ -33,7 +33,7 @@ function ep_register() {
         'capability_type' => 'post',
         'hierarchical' => false,
         'menu_position' => null,
-        'supports' => array('title','editor','thumbnail')
+        'supports' => array('title','editor')
     );
   
     register_post_type('event', $args);
