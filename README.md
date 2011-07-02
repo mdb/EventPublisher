@@ -1,6 +1,6 @@
 # EventPublisher #
 
-EventPublisher is simple Wordpress plugin that enables the publication of events via the Wordpress admin. It utilizes the jQuery UI datepicker.
+EventPublisher is simple Wordpress plugin that enables the publication of events via the Wordpress admin. It utilizes the jQuery UI datepicker and leverages Wordpress's custom post type features to create an Event post type, in addition to Wordpress's built-in Posts and Pages.
 
 ## Features ##
 
