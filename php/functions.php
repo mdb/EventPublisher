@@ -72,57 +72,8 @@ function ep_start_date() {
     <input type="text" name="event_start_date" class="ep ep-datepicker" value="<?php echo format_display_date($start_date); ?>" /> <!--TODO: why doesn't this validate with type="date" -->
     <label class="ep">Start Time</label>
     <input class="ep ep-timepicker" type="text" name="event_start_time" value="<?php echo get_time($start_date); ?>" />
-    <ol class="ep ep-timepicker">
-        <li>12:00 am</li>
-        <li>12:30 am</li>
-        <li>1:00 am</li>
-        <li>1:30 am</li>
-        <li>2:00 am</li>
-        <li>2:30 am</li>
-        <li>3:00 am</li>
-        <li>3:30 am</li>
-        <li>4:00 am</li>
-        <li>4:30 am</li>
-        <li>5:00 am</li>
-        <li>5:30 am</li>
-        <li>6:00 am</li>
-        <li>6:30 am</li>
-        <li>7:00 am</li>
-        <li>7:30 am</li>
-        <li>8:00 am</li>
-        <li>8:30 am</li>
-        <li>9:00 am</li>
-        <li>9:30 am</li>
-        <li>10:00 am</li>
-        <li>10:30 am</li>
-        <li>11:00 am</li>
-        <li>11:30 am</li>
-        <li>12:00 pm</li>
-        <li>12:30 pm</li>
-        <li>1:00 pm</li>
-        <li>1:30 pm</li>
-        <li>2:00 pm</li>
-        <li>2:30 pm</li>
-        <li>3:00 pm</li>
-        <li>3:30 pm</li>
-        <li>4:00 pm</li>
-        <li>4:30 pm</li>
-        <li>5:00 pm</li>
-        <li>5:30 pm</li>
-        <li>6:00 pm</li>
-        <li>6:30 pm</li>
-        <li>7:00 pm</li>
-        <li>7:30 pm</li>
-        <li>8:00 pm</li>
-        <li>8:30 pm</li>
-        <li>9:00 pm</li>
-        <li>9:30 pm</li>
-        <li>10:00 pm</li>
-        <li>10:30 pm</li>
-        <li>11:00 pm</li>
-        <li>11:30 pm</li>
-    </ol>
     <?php
+    time_picker_markup();
 }
 
 // End date admin form
@@ -135,57 +86,8 @@ function ep_end_date() {
     <input type="text" name="event_end_date" class="ep ep-datepicker" value="<?php echo format_display_date($end_date); ?>" />  
     <label class="ep">End Time</label>
     <input class="ep ep-timepicker" type="text" name="event_end_time" value="<?php echo get_time($end_date); ?>" />
-    <ol class="ep ep-timepicker">
-        <li>12:00 am</li>
-        <li>12:30 am</li>
-        <li>1:00 am</li>
-        <li>1:30 am</li>
-        <li>2:00 am</li>
-        <li>2:30 am</li>
-        <li>3:00 am</li>
-        <li>3:30 am</li>
-        <li>4:00 am</li>
-        <li>4:30 am</li>
-        <li>5:00 am</li>
-        <li>5:30 am</li>
-        <li>6:00 am</li>
-        <li>6:30 am</li>
-        <li>7:00 am</li>
-        <li>7:30 am</li>
-        <li>8:00 am</li>
-        <li>8:30 am</li>
-        <li>9:00 am</li>
-        <li>9:30 am</li>
-        <li>10:00 am</li>
-        <li>10:30 am</li>
-        <li>11:00 am</li>
-        <li>11:30 am</li>
-        <li>12:00 pm</li>
-        <li>12:30 pm</li>
-        <li>1:00 pm</li>
-        <li>1:30 pm</li>
-        <li>2:00 pm</li>
-        <li>2:30 pm</li>
-        <li>3:00 pm</li>
-        <li>3:30 pm</li>
-        <li>4:00 pm</li>
-        <li>4:30 pm</li>
-        <li>5:00 pm</li>
-        <li>5:30 pm</li>
-        <li>6:00 pm</li>
-        <li>6:30 pm</li>
-        <li>7:00 pm</li>
-        <li>7:30 pm</li>
-        <li>8:00 pm</li>
-        <li>8:30 pm</li>
-        <li>9:00 pm</li>
-        <li>9:30 pm</li>
-        <li>10:00 pm</li>
-        <li>10:30 pm</li>
-        <li>11:00 pm</li>
-        <li>11:30 pm</li>
-    </ol>
     <?php
+    time_picker_markup();
 }
 
 // A checkbox to make an event 'Featured' 
