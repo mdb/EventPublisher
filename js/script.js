@@ -105,13 +105,14 @@ if (typeof EP === 'undefined' || !EP)  {
                         tp.setDropdownPos(trigger, dropdown);
                     });
 
+                    tp.populateInput(trigger, dropdown);
+
                     $(trigger).blur(function() {
                         setTimeout(function () {
                             tp.hideDropdown(dropdown);
-                        }, 0);
+                        }, 100);
                     });
 
-                    tp.populateInput(trigger, dropdown);
                 },
 
                 hideDropdown: function (dropdown) {
@@ -120,7 +121,6 @@ if (typeof EP === 'undefined' || !EP)  {
 
                 setDropdownPos: function (trigger, dropdown) {
                     $(dropdown).css('left', helpers.getPosLeft(trigger));
-                    //$(dropdown).css('top', helpers.getPosTop(trigger));
                     helpers.setPosTop(trigger, dropdown);
                 },
 
