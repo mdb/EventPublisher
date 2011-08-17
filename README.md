@@ -29,10 +29,36 @@ EventPublisher offers the following:
 
 ### Upcoming Events
 
-A basic example of how to call the list of upcoming events, which defaults to displaying the next 20 events:
+A basic example of how to call the list of upcoming events:
 
     <ul class="upcoming-events">
     <?php $events = ep_upcoming_events(); ?>
+    <?php foreach( $events->posts as $post ) : setup_postdata($post); ?>
+        <?php
+            $event_location = get_post_meta($post->ID, 'event_location', true);
+            $start_date = get_post_meta($post->ID, 'start_date', true);
+            $end_date = get_post_meta($post->ID, 'end_date', true);
+        ?>
+        <li>
+            <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+            <dl class="event-dates">
+                <dt>Start Date:</dt>
+                <dd><?php echo date('m/j/Y', strtotime($start_date)); ?></dd>
+                <dt>End Date:</dt>
+                <dd><?php echo date('m/j/Y', strtotime($end_date)); ?></dd>
+            </dl>
+            <address class="location"><?php echo $event_location; ?></address>
+            <?php the_content(); ?>
+        </li>
+    <?php endforeach; ?>
+    </ul>
+
+Note that the maximum number of posts returned by ep_upcoming_events() is determined by your site's Reading settings (http://yoursite.com/wp-admin/options-reading.php)
+
+Alternatively, to customize the number of events to display, use ep_get_events(). The following example returns the next 3 upcoming events:
+
+    <ul class="upcoming-events">
+    <?php $events = ep_get_events('upcoming', '3'); ?>
     <?php foreach( $events as $post ) : setup_postdata($post); ?>
         <?php
             $event_location = get_post_meta($post->ID, 'event_location', true);
@@ -53,17 +79,13 @@ A basic example of how to call the list of upcoming events, which defaults to di
     <?php endforeach; ?>
     </ul>
 
-Alternatively, you can do the same thing as the above code, but only display the next 3 events like so:
-
-    <?php $events = ep_upcoming_events(3); ?>
-
 ### Past Events
 
     <?php $past_events = ep_past_events(); ?>
 
-Or, to limit the display to the last 3 events:
+Alternatively, use ep_get_events() to customize the number of past events to display. The following example returns the first 3 past events:
 
-    <?php $past_events = ep_past_events(3); ?>
+    <?php $past_events = ep_get_events('past', '3'); ?>
 
 ### Featured Events
 
