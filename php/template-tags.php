@@ -7,7 +7,7 @@
     Example Usage:
 
     <?php $events = ep_upcoming_events(); ?>
-    <?php foreach( $events as $post ) : setup_postdata($post); ?>
+    <?php foreach( $events->posts as $post ) : setup_postdata($post); ?>
         <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
     <?php endforeach; ?>
 
@@ -15,9 +15,17 @@
 
 // Returns upcoming events whose start time is after today
 // Defaults to 20, pass the # of events you want as an argument
-function ep_upcoming_events($num_posts = '20') { 
+function ep_upcoming_events() { 
 
   $todays_date_iso = date("c");
+  $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+  $ppp = get_option('posts_per_page');
+
+  if (!is_paged()) {
+    $custom_offset = 0;
+  } else {
+    $custom_offset = $ppp * ($paged - 1);
+  }
 
   $args = array(
     'order' => 'ASC',
@@ -25,19 +33,29 @@ function ep_upcoming_events($num_posts = '20') {
     'meta_compare' => '>=',
     'meta_value' => $todays_date_iso,
     'orderby' => 'meta_value',
-    'numberposts' => $num_posts,
+    'numberposts' => $ppp,
     'post_type' => 'event',
-    'post_status' => 'publish'
+    'offset' => $custom_offset,
+    'post_status' => 'publish',
+    'paged' => $paged
   );
 
-  return get_posts($args); 
+  return new WP_Query($args); 
 }
 
 // Returns past events whose start time is prior to today
 // Defaults to 20, pass the # of events you want as an argument
-function ep_past_events($num_posts = '20') { 
+function ep_past_events() { 
 
   $todays_date_iso = date("c");
+  $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+  $ppp = get_option('posts_per_page');
+
+  if (!is_paged()) {
+    $custom_offset = 0;
+  } else {
+    $custom_offset = $ppp * ($paged - 1);
+  }
 
   $args = array(
     'order' => 'ASC',
@@ -45,12 +63,14 @@ function ep_past_events($num_posts = '20') {
     'meta_compare' => '<=',
     'meta_value' => $todays_date_iso,
     'orderby' => 'meta_value',
-    'numberposts' => $num_posts,
+    'numberposts' => $ppp,
     'post_type' => 'event',
-    'post_status' => 'publish'
+    'offset' => $custom_offset,
+    'post_status' => 'publish',
+    'paged' => $paged
   );
 
-  return get_posts($args); 
+  return new WP_Query($args);
 }
 
 // Returns 'Featured' Events, independent of start date 
