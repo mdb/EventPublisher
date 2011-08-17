@@ -90,4 +90,30 @@ function ep_featured_events($num_posts = '1') {
   return get_posts($args); 
 }
 
+function ep_get_events($upcoming_or_past = 'upcoming', $num_posts) { 
+
+  $todays_date_iso = date("c");
+
+  if ($upcoming_or_past == 'past') {
+    $meta_compare = '<=';
+  } else if ($upcoming_or_past == 'upcoming') {
+    $meta_compare = '>=';
+  } else {
+    $meta_compare = '==';
+  }
+
+  $args = array(
+    'order' => 'ASC',
+    'meta_key' => 'start_date',
+    'meta_compare' => $meta_compare,
+    'meta_value' => $todays_date_iso,
+    'orderby' => 'meta_value',
+    'numberposts' => $num_posts,
+    'post_type' => 'event',
+    'post_status' => 'publish'
+  );
+
+  return get_posts($args); 
+}
+
 ?>
