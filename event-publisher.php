@@ -20,11 +20,8 @@ TODO:
         - admin views
 */
 
-// include the file containing most of the necessary functions
-//require 'php/functions.php';
-
 // load the template tags
-//require 'php/template-tags.php';
+require 'php/template-tags.php';
 
 // Create an 'EventPublisher' class and constructor if one does not already exist
 if (!class_exists('EventPublisher')) {
